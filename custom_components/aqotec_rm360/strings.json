@@ -1,0 +1,577 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to the RM360",
+        "description": "Modbus TCP must be enabled on the controller (parameter 914 = TCPIP, port 502). The controller serves a single Modbus client at a time — remove any other Modbus configuration for it first.",
+        "data": {
+          "name": "Name",
+          "host": "Host",
+          "port": "Port",
+          "device_id": "Modbus unit id"
+        },
+        "data_description": {
+          "host": "IP address or host name of the controller.",
+          "device_id": "1 unless changed on the controller."
+        }
+      },
+      "reconfigure": {
+        "title": "Change connection",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "device_id": "Modbus unit id"
+        },
+        "data_description": {
+          "host": "IP address or host name of the controller.",
+          "device_id": "1 unless changed on the controller."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect. Check the address and that no other Modbus client is connected to the controller.",
+      "not_rm360": "The device answered but refused the RM360 registers.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This controller is already configured.",
+      "reconfigure_successful": "The connection was updated."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "buffer_charge_pump": {
+        "name": "Buffer charge pump"
+      },
+      "circulation_pump": {
+        "name": "Circulation pump"
+      },
+      "hc2_pump": {
+        "name": "HC2 pump"
+      },
+      "fwm_pump": {
+        "name": "Fresh water module pump"
+      },
+      "hc4_pump": {
+        "name": "HC4 pump"
+      },
+      "fwm_flow_switch": {
+        "name": "Hot water draw"
+      }
+    },
+    "sensor": {
+      "outdoor_temperature": {
+        "name": "Outdoor temperature",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "primary_return": {
+        "name": "Primary return",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "secondary_flow": {
+        "name": "Secondary flow",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "secondary_return": {
+        "name": "Secondary return",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "secondary_flow_target": {
+        "name": "Secondary flow target"
+      },
+      "primary_valve_action": {
+        "name": "Primary valve action",
+        "state": {
+          "idle": "Idle",
+          "opening": "Opening",
+          "closing": "Closing"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "primary_valve": {
+        "name": "Primary valve"
+      },
+      "return_limit": {
+        "name": "Return temperature limit"
+      },
+      "station_status": {
+        "name": "Station status",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "return_limit": "Return limitation",
+          "power_limit": "Power limitation",
+          "external_off": "Off: external",
+          "manual": "Manual"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "station_mode": {
+        "name": "Station mode",
+        "state": {
+          "auto": "Auto",
+          "heating_only": "Heating only",
+          "dhw_only": "Hot water only",
+          "off": "Off"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "correction_day": {
+        "name": "Correction day"
+      },
+      "correction_night": {
+        "name": "Correction night"
+      },
+      "heat_energy": {
+        "name": "Heat energy"
+      },
+      "heat_volume": {
+        "name": "Heat meter volume"
+      },
+      "heat_power": {
+        "name": "Heat power"
+      },
+      "heat_flow_rate": {
+        "name": "Heat meter flow rate"
+      },
+      "heat_meter_flow": {
+        "name": "Heat meter flow temperature"
+      },
+      "heat_meter_return": {
+        "name": "Heat meter return temperature"
+      },
+      "heat_meter_delta": {
+        "name": "Heat meter temperature difference"
+      },
+      "heat_meter_error": {
+        "name": "Heat meter error"
+      },
+      "buffer_level_1": {
+        "name": "Buffer level 1 (T13)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "buffer_top": {
+        "name": "Buffer top (T23)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "buffer_level_3": {
+        "name": "Buffer level 3 (7TMP)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "buffer_level_4": {
+        "name": "Buffer level 4 (7FBT)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "buffer_bottom": {
+        "name": "Buffer bottom (T24)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "buffer_top_target": {
+        "name": "Buffer top target"
+      },
+      "buffer_bottom_cutoff": {
+        "name": "Buffer bottom cut-off"
+      },
+      "buffer_charge_target": {
+        "name": "Buffer charge target"
+      },
+      "buffer_charge_valve": {
+        "name": "Buffer charge valve"
+      },
+      "buffer_charge_status": {
+        "name": "Buffer charge status"
+      },
+      "dhw_zone_charge_target": {
+        "name": "Hot water zone charge target"
+      },
+      "dhw_zone_status": {
+        "name": "Hot water zone status",
+        "state": {
+          "off_charged": "Off / charged",
+          "frost_protection": "Frost protection",
+          "charge_pause": "Charge pause",
+          "minimum_temperature": "Minimum temperature charge",
+          "scheduled": "Scheduled charge",
+          "manual_once": "One-off manual charge",
+          "contact": "Charge by contact",
+          "forced_by_visu": "Forced by visualisation",
+          "disinfection_auto": "Disinfection automatic",
+          "disinfection_contact": "Disinfection by contact",
+          "disinfection_manual": "Disinfection until deactivated",
+          "disinfection_manual_temperature": "Disinfection until temperature",
+          "manual": "Manual"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "circulation_temperature": {
+        "name": "Circulation temperature",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "circulation_status": {
+        "name": "Circulation status",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "temperature_cutoff": "Temperature cut-off",
+          "disinfection": "Disinfection",
+          "frost_protection": "Frost protection"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_flow": {
+        "name": "HC2 flow",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "hc2_flow_target": {
+        "name": "HC2 flow target"
+      },
+      "hc2_return": {
+        "name": "HC2 return",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "hc2_mixer": {
+        "name": "HC2 mixer",
+        "state": {
+          "idle": "Idle",
+          "opening": "Opening",
+          "closing": "Closing"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_status": {
+        "name": "HC2 status",
+        "state": {
+          "day": "Day",
+          "setback": "Setback",
+          "party": "Party",
+          "usage_period": "Usage period",
+          "off_outdoor_temperature": "Off: outdoor temperature",
+          "off_room_temperature": "Off: room temperature",
+          "off_dhw_priority": "Off: hot water priority",
+          "off_buffer_too_cold": "Off: buffer too cold",
+          "off_external": "Off: external / frost protection",
+          "off_non_usage_period": "Off: non-usage period",
+          "frost_protection": "Frost protection",
+          "screed_drying": "Screed drying",
+          "manual": "Manual"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_mode": {
+        "name": "HC2 mode",
+        "state": {
+          "auto": "Auto",
+          "day": "Day",
+          "setback": "Setback",
+          "party": "Party",
+          "off": "Off"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_correction_day": {
+        "name": "HC2 correction day"
+      },
+      "hc2_correction_night": {
+        "name": "HC2 correction night"
+      },
+      "fwm_flow": {
+        "name": "Fresh water module flow",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "fwm_flow_target": {
+        "name": "Fresh water module flow target"
+      },
+      "dhw_outlet": {
+        "name": "Hot water outlet",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "fwm_pump_speed": {
+        "name": "Fresh water module pump speed"
+      },
+      "fwm_status": {
+        "name": "Fresh water module status",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "normal_reduced": "Normal, reduced target",
+          "disinfection_contact": "Disinfection by contact",
+          "disinfection_period": "Disinfection period",
+          "disinfection_mode": "Disinfection mode",
+          "off_overtemperature": "Off: overtemperature"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "fwm_flow_rate": {
+        "name": "Fresh water module flow rate"
+      },
+      "hc4_flow": {
+        "name": "HC4 flow",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "hc4_flow_target": {
+        "name": "HC4 flow target"
+      },
+      "hc4_return": {
+        "name": "HC4 return",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Probe fault",
+            "state": {
+              "short_circuit": "Short circuit",
+              "open_circuit": "Open circuit",
+              "not_configured": "Not configured"
+            }
+          }
+        }
+      },
+      "hc4_mixer": {
+        "name": "HC4 mixer",
+        "state": {
+          "idle": "Idle",
+          "opening": "Opening",
+          "closing": "Closing"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc4_status": {
+        "name": "HC4 status",
+        "state": {
+          "day": "Day",
+          "setback": "Setback",
+          "party": "Party",
+          "usage_period": "Usage period",
+          "off_outdoor_temperature": "Off: outdoor temperature",
+          "off_room_temperature": "Off: room temperature",
+          "off_dhw_priority": "Off: hot water priority",
+          "off_buffer_too_cold": "Off: buffer too cold",
+          "off_external": "Off: external / frost protection",
+          "off_non_usage_period": "Off: non-usage period",
+          "frost_protection": "Frost protection",
+          "screed_drying": "Screed drying",
+          "manual": "Manual"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc4_mode": {
+        "name": "HC4 mode",
+        "state": {
+          "auto": "Auto",
+          "day": "Day",
+          "setback": "Setback",
+          "party": "Party",
+          "off": "Off"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc4_correction_day": {
+        "name": "HC4 correction day"
+      },
+      "hc4_correction_night": {
+        "name": "HC4 correction night"
+      },
+      "fault_byte_1": {
+        "name": "Fault byte 1"
+      },
+      "fault_byte_2": {
+        "name": "Fault byte 2"
+      },
+      "fault_byte_3": {
+        "name": "Fault byte 3"
+      },
+      "fault_byte_4": {
+        "name": "Fault byte 4"
+      },
+      "faults": {
+        "name": "Active faults",
+        "state_attributes": {
+          "faults": {
+            "name": "Faults"
+          }
+        }
+      }
+    }
+  }
+}
