@@ -21,7 +21,7 @@ Read-only. Nothing is written to the controller.
 | Buffer | five levels (T13, T23, 7TMP, 7FBT, T24), top target, bottom cut-off, charge target, charge pump, charge valve |
 | Hot water | fresh water module status, pump, pump speed, outlet temperature, hot water draw, circulation temperature, pump and status |
 | HC2 / HC4 | flow, flow target, return, pump, mixer, status, mode, day/night correction |
-| Faults | number of active faults, listed by number and description; the four raw fault bytes as diagnostics |
+| Faults | number of active faults, listed by number and description (in aqotec's German wording when Home Assistant runs in German); the four raw fault bytes as diagnostics |
 
 Status and mode registers become enum sensors (*Day*, *Setback*, *Off: external /
 frost protection*, …), with the raw code kept as the `code` attribute. Pumps are

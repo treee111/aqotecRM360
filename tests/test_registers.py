@@ -72,6 +72,18 @@ def test_fault_bytes():
     assert all(n in R.FAULTS for n in R.active_faults(values))
 
 
+def test_fault_texts_in_both_languages():
+    assert set(R.FAULTS) == set(R.FAULTS_DE) == set(range(1, 58))
+    assert R.fault_texts("de")[27] == "Messfehler Fühler T20"
+    assert R.fault_texts("de-CH")[44] == "SpKr.1 Desinfektion nicht erreicht"
+    assert R.fault_texts("en")[27] == "Probe T20 measurement error"
+    assert R.fault_texts("fr") is R.FAULTS
+    # Numbering as aqotec lists it: 12 is HC2, 18 HC8, 19 the first probe.
+    assert R.FAULTS_DE[12] == "HK2 VL-Sollwert nicht erreicht"
+    assert R.FAULTS_DE[18] == "HK8 VL-Sollwert nicht erreicht"
+    assert R.FAULTS_DE[19] == "Messfehler Fühler T10"
+
+
 def test_decode_block_offsets():
     block = next(b for b in R.plan_blocks() if b.start == 43000)
     words = [0] * block.count

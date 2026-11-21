@@ -26,7 +26,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from . import RM360ConfigEntry
 from .entity import RM360Entity
-from .registers import FAULTS, REGISTERS_BY_KEY, active_faults, probe_fault
+from .registers import REGISTERS_BY_KEY, active_faults, fault_texts, probe_fault
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -277,9 +277,10 @@ class RM360FaultsSensor(RM360Entity, SensorEntity):
         faults = self._faults
         if faults is None:
             return None
+        texts = fault_texts(self.hass.config.language)
         return {
             "faults": [
-                f"{number}: {FAULTS.get(number, 'undocumented')}" for number in faults
+                f"{number}: {texts.get(number, '?')}" for number in faults
             ]
         }
 

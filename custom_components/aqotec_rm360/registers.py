@@ -232,7 +232,7 @@ FAULTS: dict[int, str] = {
     9: "Heat meter 1 error",
     10: "M-Bus device 2-40 error",
     11: "Station flow target not reached",
-    **{11 + hc: f"HC{hc} flow target not reached" for hc in range(2, 9)},
+    **{10 + hc: f"HC{hc} flow target not reached" for hc in range(2, 9)},
     **{
         19 + i: f"Probe {probe} measurement error"
         for i, probe in enumerate(
@@ -261,6 +261,57 @@ FAULTS: dict[int, str] = {
     57: "HC1 flow target not reached",
 }
 
+
+# The same faults in aqotec's own German wording.
+FAULTS_DE: dict[int, str] = {
+    1: "Station in Rücklaufbegrenzung länger als 30 min",
+    2: "Station in Leistungsbegrenzung länger als 30 min",
+    3: "Ventil schließt nicht",
+    4: "Übertemperatur externe Energiequelle",
+    5: "Übertemperatur Brenner",
+    6: "Untertemperatur Frischwassermodul",
+    7: "Lademodul 1 Rücklaufbegrenzung länger als 30 min",
+    8: "Lademodul 2 Rücklaufbegrenzung länger als 30 min",
+    9: "Fehler Wärmemengenzähler 1",
+    10: "Fehler M-Bus-Gerät 2-40",
+    11: "Station VL-Sollwert nicht erreicht",
+    **{10 + hc: f"HK{hc} VL-Sollwert nicht erreicht" for hc in range(2, 9)},
+    **{
+        19 + i: f"Messfehler Fühler {probe}"
+        for i, probe in enumerate(
+            (
+                "T10", "T11", "T12", "T13", "T14", "T15", "T16", "T17", "T20",
+                "T23", "T24", "3TMP", "3FBT", "4TMP", "4FBT", "5TMP", "5FBT",
+                "6TMP", "6FBT", "7TMP", "7FBT", "8TMP", "8FBT",
+            )
+        )
+    },
+    42: "Fehler Kommunikation FBR360",
+    43: "Fehler Kommunikation Subregler",
+    44: "SpKr.1 Desinfektion nicht erreicht",
+    45: "SpKr.2 Desinfektion nicht erreicht",
+    46: "Mindestdruckschwelle sekundär unterschritten",
+    47: "Störeingang 1",
+    48: "Störeingang 2",
+    49: "Störeingang 3",
+    50: "Externe Störung (Modbus oder Visu)",
+    51: "Visu Wertausgabe 1",
+    52: "Visu Wertausgabe 2",
+    53: "Visu Wertausgabe 3",
+    54: "VL-Sollwert Station 2 nicht erreicht",
+    55: "SpKr.1 Sollwert nicht erreicht",
+    56: "SpKr.2 Sollwert nicht erreicht",
+    57: "HK1 VL-Sollwert nicht erreicht",
+}
+
+
+def fault_texts(language: str) -> dict[int, str]:
+    """Return the fault descriptions in German or, failing that, English.
+
+    State attributes are not translated by Home Assistant, so the language
+    is picked here from the instance's configured language.
+    """
+    return FAULTS_DE if language.split("-")[0] == "de" else FAULTS
 
 @dataclass(frozen=True)
 class Block:
