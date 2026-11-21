@@ -1,0 +1,577 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit dem RM360 verbinden",
+        "description": "Am Regler muss Modbus TCP aktiv sein (Parameter 914 = TCPIP, Port 502). Der Regler bedient nur einen Modbus-Client gleichzeitig – andere Modbus-Konfigurationen für ihn vorher entfernen.",
+        "data": {
+          "name": "Name",
+          "host": "Host",
+          "port": "Port",
+          "device_id": "Modbus-Geräteadresse"
+        },
+        "data_description": {
+          "host": "IP-Adresse oder Hostname des Reglers.",
+          "device_id": "1, sofern am Regler nicht geändert."
+        }
+      },
+      "reconfigure": {
+        "title": "Verbindung ändern",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "device_id": "Modbus-Geräteadresse"
+        },
+        "data_description": {
+          "host": "IP-Adresse oder Hostname des Reglers.",
+          "device_id": "1, sofern am Regler nicht geändert."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Keine Verbindung. Adresse prüfen und sicherstellen, dass kein anderer Modbus-Client mit dem Regler verbunden ist.",
+      "not_rm360": "Das Gerät antwortet, verweigert aber die RM360-Register.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Dieser Regler ist bereits eingerichtet.",
+      "reconfigure_successful": "Die Verbindung wurde aktualisiert."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "buffer_charge_pump": {
+        "name": "Pufferladepumpe"
+      },
+      "circulation_pump": {
+        "name": "Zirkulationspumpe"
+      },
+      "hc2_pump": {
+        "name": "HK2 Pumpe"
+      },
+      "fwm_pump": {
+        "name": "Frischwassermodul Pumpe"
+      },
+      "hc4_pump": {
+        "name": "HK4 Pumpe"
+      },
+      "fwm_flow_switch": {
+        "name": "Warmwasser Zapfung"
+      }
+    },
+    "sensor": {
+      "outdoor_temperature": {
+        "name": "Außentemperatur",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "primary_return": {
+        "name": "Primär Rücklauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "secondary_flow": {
+        "name": "Sekundär Vorlauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "secondary_return": {
+        "name": "Sekundär Rücklauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "secondary_flow_target": {
+        "name": "Sekundär Vorlauf Soll"
+      },
+      "primary_valve_action": {
+        "name": "Primärventil Bewegung",
+        "state": {
+          "idle": "Steht",
+          "opening": "Öffnet",
+          "closing": "Schließt"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "primary_valve": {
+        "name": "Primärventil"
+      },
+      "return_limit": {
+        "name": "Rücklaufbegrenzung"
+      },
+      "station_status": {
+        "name": "Station Status",
+        "state": {
+          "off": "Aus",
+          "normal": "Normalbetrieb",
+          "return_limit": "Rücklaufbegrenzung",
+          "power_limit": "Leistungsbegrenzung",
+          "external_off": "Aus: extern",
+          "manual": "Handbetrieb"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "station_mode": {
+        "name": "Station Betriebsmodus",
+        "state": {
+          "auto": "Auto",
+          "heating_only": "Nur Heizung",
+          "dhw_only": "Nur Warmwasser",
+          "off": "Aus"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "correction_day": {
+        "name": "Korrektur Tag"
+      },
+      "correction_night": {
+        "name": "Korrektur Nacht"
+      },
+      "heat_energy": {
+        "name": "Wärmezähler Energie"
+      },
+      "heat_volume": {
+        "name": "Wärmezähler Volumen"
+      },
+      "heat_power": {
+        "name": "Wärmezähler Leistung"
+      },
+      "heat_flow_rate": {
+        "name": "Wärmezähler Durchfluss"
+      },
+      "heat_meter_flow": {
+        "name": "Wärmezähler Vorlauf"
+      },
+      "heat_meter_return": {
+        "name": "Wärmezähler Rücklauf"
+      },
+      "heat_meter_delta": {
+        "name": "Wärmezähler Spreizung"
+      },
+      "heat_meter_error": {
+        "name": "Wärmezähler Fehlerstatus"
+      },
+      "buffer_level_1": {
+        "name": "Puffer Niveau 1 (T13)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "buffer_top": {
+        "name": "Puffer oben (T23)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "buffer_level_3": {
+        "name": "Puffer Niveau 3 (7TMP)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "buffer_level_4": {
+        "name": "Puffer Niveau 4 (7FBT)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "buffer_bottom": {
+        "name": "Puffer unten (T24)",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "buffer_top_target": {
+        "name": "Puffer Soll oben"
+      },
+      "buffer_bottom_cutoff": {
+        "name": "Puffer Abschalttemperatur unten"
+      },
+      "buffer_charge_target": {
+        "name": "Puffer Ladesolltemperatur"
+      },
+      "buffer_charge_valve": {
+        "name": "Pufferladeventil"
+      },
+      "buffer_charge_status": {
+        "name": "Pufferladung Status"
+      },
+      "dhw_zone_charge_target": {
+        "name": "Warmwasserzone Ladesolltemperatur"
+      },
+      "dhw_zone_status": {
+        "name": "Warmwasserzone Status",
+        "state": {
+          "off_charged": "Aus / geladen",
+          "frost_protection": "Frostschutz",
+          "charge_pause": "Ladepause",
+          "minimum_temperature": "Minimaltemperatur-Ladung",
+          "scheduled": "Zeitladung",
+          "manual_once": "Einmalige Ladung händisch",
+          "contact": "Ladung wegen Kontakt",
+          "forced_by_visu": "Zwangsladung durch Visu",
+          "disinfection_auto": "Desinfektion automatisch",
+          "disinfection_contact": "Desinfektion wegen Kontakt",
+          "disinfection_manual": "Desinfektion bis Deaktivierung",
+          "disinfection_manual_temperature": "Desinfektion bis Temperatur",
+          "manual": "Handbetrieb"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "circulation_temperature": {
+        "name": "Zirkulation Temperatur",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "circulation_status": {
+        "name": "Zirkulation Status",
+        "state": {
+          "off": "Aus",
+          "normal": "Normalbetrieb",
+          "temperature_cutoff": "Temperaturabschaltung",
+          "disinfection": "Desinfektion",
+          "frost_protection": "Frostschutz"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_flow": {
+        "name": "HK2 Vorlauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "hc2_flow_target": {
+        "name": "HK2 Vorlauf Soll"
+      },
+      "hc2_return": {
+        "name": "HK2 Rücklauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "hc2_mixer": {
+        "name": "HK2 Mischer",
+        "state": {
+          "idle": "Steht",
+          "opening": "Öffnet",
+          "closing": "Schließt"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_status": {
+        "name": "HK2 Status",
+        "state": {
+          "day": "Tagbetrieb",
+          "setback": "Absenkung",
+          "party": "Partybetrieb",
+          "usage_period": "Nutzungszeitraum",
+          "off_outdoor_temperature": "Aus: Außentemperatur-Abschaltung",
+          "off_room_temperature": "Aus: Raumtemperatur-Abschaltung",
+          "off_dhw_priority": "Aus: Warmwasser-Vorrang",
+          "off_buffer_too_cold": "Aus: Pufferuntertemperatur",
+          "off_external": "Aus: extern / Frostschutz",
+          "off_non_usage_period": "Aus: Nichtnutzungszeitraum",
+          "frost_protection": "Frostschutz",
+          "screed_drying": "Estrichausheizung",
+          "manual": "Handbetrieb"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_mode": {
+        "name": "HK2 Betriebsmodus",
+        "state": {
+          "auto": "Auto",
+          "day": "Tagbetrieb",
+          "setback": "Absenkung",
+          "party": "Partybetrieb",
+          "off": "Aus"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc2_correction_day": {
+        "name": "HK2 Korrektur Tag"
+      },
+      "hc2_correction_night": {
+        "name": "HK2 Korrektur Nacht"
+      },
+      "fwm_flow": {
+        "name": "Frischwassermodul Vorlauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "fwm_flow_target": {
+        "name": "Frischwassermodul Vorlauf Soll"
+      },
+      "dhw_outlet": {
+        "name": "Warmwasser Austritt",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "fwm_pump_speed": {
+        "name": "Frischwassermodul Pumpe Drehzahl"
+      },
+      "fwm_status": {
+        "name": "Frischwassermodul Status",
+        "state": {
+          "off": "Aus",
+          "normal": "Normalbetrieb",
+          "normal_reduced": "Normalbetrieb mit Absenkung",
+          "disinfection_contact": "Desinfektion wegen Kontakt",
+          "disinfection_period": "Desinfektion Zeitraum",
+          "disinfection_mode": "Desinfektion Betriebsmodus",
+          "off_overtemperature": "Aus: Übertemperatur"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "fwm_flow_rate": {
+        "name": "Frischwassermodul Durchfluss"
+      },
+      "hc4_flow": {
+        "name": "HK4 Vorlauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "hc4_flow_target": {
+        "name": "HK4 Vorlauf Soll"
+      },
+      "hc4_return": {
+        "name": "HK4 Rücklauf",
+        "state_attributes": {
+          "probe_fault": {
+            "name": "Fühlerfehler",
+            "state": {
+              "short_circuit": "Kurzschluss",
+              "open_circuit": "Offener Eingang",
+              "not_configured": "Nicht konfiguriert"
+            }
+          }
+        }
+      },
+      "hc4_mixer": {
+        "name": "HK4 Mischer",
+        "state": {
+          "idle": "Steht",
+          "opening": "Öffnet",
+          "closing": "Schließt"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc4_status": {
+        "name": "HK4 Status",
+        "state": {
+          "day": "Tagbetrieb",
+          "setback": "Absenkung",
+          "party": "Partybetrieb",
+          "usage_period": "Nutzungszeitraum",
+          "off_outdoor_temperature": "Aus: Außentemperatur-Abschaltung",
+          "off_room_temperature": "Aus: Raumtemperatur-Abschaltung",
+          "off_dhw_priority": "Aus: Warmwasser-Vorrang",
+          "off_buffer_too_cold": "Aus: Pufferuntertemperatur",
+          "off_external": "Aus: extern / Frostschutz",
+          "off_non_usage_period": "Aus: Nichtnutzungszeitraum",
+          "frost_protection": "Frostschutz",
+          "screed_drying": "Estrichausheizung",
+          "manual": "Handbetrieb"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc4_mode": {
+        "name": "HK4 Betriebsmodus",
+        "state": {
+          "auto": "Auto",
+          "day": "Tagbetrieb",
+          "setback": "Absenkung",
+          "party": "Partybetrieb",
+          "off": "Aus"
+        },
+        "state_attributes": {
+          "code": {
+            "name": "Code"
+          }
+        }
+      },
+      "hc4_correction_day": {
+        "name": "HK4 Korrektur Tag"
+      },
+      "hc4_correction_night": {
+        "name": "HK4 Korrektur Nacht"
+      },
+      "fault_byte_1": {
+        "name": "Fehlerbyte 1"
+      },
+      "fault_byte_2": {
+        "name": "Fehlerbyte 2"
+      },
+      "fault_byte_3": {
+        "name": "Fehlerbyte 3"
+      },
+      "fault_byte_4": {
+        "name": "Fehlerbyte 4"
+      },
+      "faults": {
+        "name": "Aktive Störungen",
+        "state_attributes": {
+          "faults": {
+            "name": "Störungen"
+          }
+        }
+      }
+    }
+  }
+}
