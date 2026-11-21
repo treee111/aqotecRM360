@@ -57,7 +57,7 @@ leaves that untouched; Modbus RTU on COM-A would not.
 ### HACS
 
 1. HACS → ⋮ → *Custom repositories*
-2. Add `https://github.com/treee111/aqotecRm360`, category *Integration*
+2. Add `https://github.com/treee111/aqotecRM360`, category *Integration*
 3. Install "aqotec RM360", then restart Home Assistant
 
 ### Manual
@@ -135,8 +135,8 @@ Runs without Home Assistant or pymodbus.
 
 [hacs-badge]: https://img.shields.io/badge/HACS-Custom-41BDF5.svg
 [hacs-url]: https://hacs.xyz/docs/faq/custom_repositories
-[hacs-ci-badge]: https://github.com/treee111/aqotecRm360/actions/workflows/validate.yaml/badge.svg
-[hacs-ci-url]: https://github.com/treee111/aqotecRm360/actions/workflows/validate.yaml
-[hassfest-badge]: https://github.com/treee111/aqotecRm360/actions/workflows/hassfest.yaml/badge.svg
-[hassfest-url]: https://github.com/treee111/aqotecRm360/actions/workflows/hassfest.yaml
+[hacs-ci-badge]: https://github.com/treee111/aqotecRM360/actions/workflows/validate.yaml/badge.svg
+[hacs-ci-url]: https://github.com/treee111/aqotecRM360/actions/workflows/validate.yaml
+[hassfest-badge]: https://github.com/treee111/aqotecRM360/actions/workflows/hassfest.yaml/badge.svg
+[hassfest-url]: https://github.com/treee111/aqotecRM360/actions/workflows/hassfest.yaml
 [license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
